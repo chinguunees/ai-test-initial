@@ -1,5 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Creator from "./creator";
+import Analysis from "./imageAnalysis";
+import Chat from "./ingredient";
 
 const Tabss = () => {
   return (
@@ -11,10 +13,10 @@ const Tabss = () => {
           <TabsTrigger value="creator">Image Creator</TabsTrigger>
         </TabsList>
         <TabsContent value="analysis" className="text-white">
-          SDAaaaaaaaaa.
+          <Analysis />
         </TabsContent>
         <TabsContent value="recognition" className="text-white">
-          Change your password here.
+          <Chat />
         </TabsContent>
         <TabsContent value="creator" className="text-white">
           <Creator />

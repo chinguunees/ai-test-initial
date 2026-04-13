@@ -14,7 +14,7 @@ export default function Creator() {
 
   const onClick = async () => {
     setLoading(true);
-    const client = new InferenceClient("APIKEY");
+    const client = new InferenceClient(process.env.HF_TOKEN);
 
     const image = await client.textToImage({
       provider: "nscale",
@@ -22,21 +22,19 @@ export default function Creator() {
       inputs: prompt,
       parameters: { num_inference_steps: 5 },
     });
-    const url = URL.createObjectURL(image);
+    const url = URL.createObjectURL(image as unknown as Blob);
     setData(url);
     setLoading(false);
   };
 
   return (
-    <main className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center px-4 py-16 font-manrope ">
-      {/* Glow blobs */}
+    <main className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center px-4 py-16 font-manrope pt-10">
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 w-full max-w-2xl flex flex-col gap-8">
-        {/* Header */}
         <div className="flex flex-col gap-1">
           <span className="text-xs tracking-[0.2em] uppercase text-white font-medium">
             AI Image Generator
@@ -64,7 +62,6 @@ export default function Creator() {
           </button>
         </div>
 
-        {/* Result */}
         {loading ? (
           <div className="w-full aspect-video rounded-2xl border border-dashed border-zinc-800 flex flex-col items-center justify-center gap-3">
             <div className="w-8 h-8 rounded-full border-2 border-zinc-700 border-t-white animate-spin" />
